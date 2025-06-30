@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معالجة - محطة المياه النقية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e88e5, #42a5f5);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo::before {
+            content: "💧";
+            margin-left: 10px;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .order-btn {
+            background-color: #ff6b35;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+            background-color: #e55a2b;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 4rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-content {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e88e5, #42a5f5);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,107,53,0.3);
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: #1e88e5;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 8rem;
+            color: #42a5f5;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: #f8f9fa;
+        }
+
+        .services h2 {
+            text-align: center;
+            color: #1e88e5;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #1e88e5;
+        }
+
+        .service-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Products Section */
+        .products {
+            background-color: white;
+        }
+
+        .products h2 {
+            text-align: center;
+            color: #1e88e5;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #1e88e5;
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #42a5f5;
+        }
+
+        .price {
+            color: #ff6b35;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f8f9fa;
+        }
+
+        .contact h2 {
+            text-align: center;
+            color: #1e88e5;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item::before {
+            content: "📍";
+            margin-left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item:nth-child(2)::before {
+            content: "📞";
+        }
+
+        .contact-item:nth-child(3)::before {
+            content: "✉️";
+        }
+
+        /* Forms */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #1e88e5;
+        }
+
+        button {
+            background: linear-gradient(135deg, #1e88e5, #42a5f5);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Order Section */
+        .order {
+            background: linear-gradient(135deg, #1e88e5, #42a5f5);
+            color: white;
+        }
+
+        .order h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .order .form-container {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+        }
+
+        /* Message Alert */
+        .message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                min-height: auto;
+                padding: 2rem 0;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">معالجة</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">عن الشركة</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#products">منتجاتنا</a></li>
+                        <li><a href="#contact">تواصل معنا</a></li>
+                        <li><a href="#order" class="order-btn">اطلب الآن</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="section-content">
+                    <h1>مياه نقية لحياة صحية</h1>
+                    <p>نقدم لك أنقى وأجود أنواع المياه المعالجة، بأحدث التقنيات العالمية لضمان صحة أفضل لك ولعائلتك</p>
+                    <a href="#order" class="cta-button">اطلب الآن</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-content">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>عن الشركة</h2>
+                            <p>شركة المقبلي هي إحدى الشركات الرائدة في مجال معالجة وتنقية المياه في المنطقة. تأسست الشركة عام 2010 برؤية واضحة لتوفير مياه نقية وصحية لجميع العائلات.</p>
+                            <p>نحن نستخدم أحدث التقنيات العالمية في معالجة المياه، ونلتزم بأعلى معايير الجودة والسلامة لضمان حصولكم على أفضل جودة مياه ممكنة.</p>
+                            <p>رؤيتنا هي أن نكون الخيار الأول لكل من يبحث عن مياه نقية وصحية، ونسعى دائماً لتطوير خدماتنا ومنتجاتنا لتلبية احتياجات عملائنا الكرام.</p>
+                        </div>
+                        <div class="about-image">
+                            💧🏭
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-content">
+                    <h2>خدماتنا</h2>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">🚚</div>
+                            <h3>توصيل سريع</h3>
+                            <p>نوفر خدمة توصيل سريعة وموثوقة لجميع أنحاء المدينة خلال 24 ساعة من تأكيد الطلب</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">🔬</div>
+                            <h3>فحص دوري للجودة</h3>
+                            <p>نقوم بفحص دوري ومستمر لجودة المياه في مختبراتنا المعتمدة لضمان أعلى معايير النقاء</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">📞</div>
+                            <h3>خدمة عملاء 24/7</h3>
+                            <p>فريق خدمة العملاء متاح على مدار الساعة للإجابة على استفساراتكم وتلبية طلباتكم</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">♻️</div>
+                            <h3>صديق للبيئة</h3>
+                            <p>نستخدم عبوات قابلة لإعادة التدوير ونتبع ممارسات صديقة للبيئة في جميع عملياتنا</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products">
+            <div class="container">
+                <div class="section-content">
+                    <h2>منتجاتنا</h2>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-icon">🍼</div>
+                            <h3>مياه الأطفال</h3>
+                            <p>مياه مخصصة للأطفال والرضع، معالجة بعناية فائقة</p>
+                            <div class="price">15 ريال</div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon">💧</div>
+                            <h3>مياه الشرب العادية</h3>
+                            <p>مياه نقية ومعالجة للاستخدام اليومي - عبوة 20 لتر</p>
+                            <div class="price">8 ريال</div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon">⭐</div>
+                            <h3>مياه بريميوم</h3>
+                            <p>مياه فاخرة بمعالجة متقدمة وإضافات معدنية مفيدة</p>
+                            <div class="price">25 ريال</div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon">🏢</div>
+                            <h3>مياه للشركات</h3>
+                            <p>حلول مياه متكاملة للمكاتب والشركات بأسعار مميزة</p>
+                            <div class="price">اتصل بنا</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-content">
+                    <h2>تواصل معنا</h2>
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <h3>معلومات التواصل</h3>
+                            <div class="contact-item">تعز،الضباب ،مقابل فندق الكرساح</div>
+                            <div class="contact-item">779120774</div>
+                            <div class="contact-item">zaldynalm@gmail.com</div>                    
+                            <h3 style="margin-top: 2rem;">ساعات العمل</h3>
+                            <p>السبت - الخميس: 8:00 ص - 10:00 م</p>
+                            <p>الجمعة: 2:00 م - 10:00 م</p>
+                        </div>
+                        
+                        <div class="form-container">
+                            <h3>أرسل لنا رسالة</h3>
+                            <form action="#" method="POST">
+                                <div class="form-group">
+                                    <label for="contact_name">الاسم</label>
+                                    <input type="text" id="contact_name" name="contact_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact_email">البريد الإلكتروني</label>
+                                    <input type="email" id="contact_email" name="contact_email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact_message">الرسالة</label>
+                                    <textarea id="contact_message" name="contact_message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit">إرسال الرسالة</button>
+                            </form>
+                            <p style="margin-top: 1rem; color: #dc3545;">ملاحظة: هذا النموذج لا يعمل بدون خادم PHP. سيتم إرسال البيانات إلى لا شيء.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Section -->
+        <section id="order" class="order">
+            <div class="container">
+                <div class="section-content">
+                    <h2>اطلب الآن</h2>
+                    <div class="form-container">
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="name">الاسم الكامل</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">رقم الهاتف</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">العنوان</label>
+                                <textarea id="address" name="address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">نوع المياه والكمية</label>
+                                <select id="quantity" name="quantity" required>
+                                    <option value="">اختر نوع المياه</option>
+                                    <option value="عادية-1">مياه عادية - عبوة واحدة (8 ريال)</option>
+                                    <option value="عادية-5">مياه عادية - 5 عبوات (35 ريال)</option>
+                                    <option value="عادية-10">مياه عادية - 10 عبوات (65 ريال)</option>
+                                    <option value="اطفال-1">مياه أطفال - عبوة واحدة (15 ريال)</option>
+                                    <option value="اطفال-3">مياه أطفال - 3 عبوات (40 ريال)</option>
+                                    <option value="بريميوم-1">مياه بريميوم - عبوة واحدة (25 ريال)</option>
+                                    <option value="بريميوم-3">مياه بريميوم - 3 عبوات (65 ريال)</option>
+                                </select>
+                            </div>
+                            <button type="submit">تأكيد الطلب</button>
+                        </form>
+                        <p style="margin-top: 1rem; color: #dc3545;">ملاحظة: هذا النموذج لا يعمل بدون خادم PHP. سيتم إرسال البيانات إلى لا شيء.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active class to navigation links
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Basic client-side form validation (does not replace server-side processing)
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const inputs = this.querySelectorAll('input[required], textarea[required], select[required]');
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.style.borderColor = '#dc3545'; // Highlight invalid fields
+                    } else {
+                        input.style.borderColor = '#28a745'; // Highlight valid fields
+                    }
+                });
+                
+                if (!isValid) {
+                    e.preventDefault(); // Prevent form submission if validation fails
+                    alert('يرجى ملء جميع الحقول المطلوبة');
+                } else {
+                    // For HTML version, we just show an alert since there's no server-side processing
+                    e.preventDefault();
+                    alert('تم إرسال النموذج بنجاح (ملاحظة: هذا النموذج لا يعمل بدون خادم)!');
+                    form.reset(); // Clear the form
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
